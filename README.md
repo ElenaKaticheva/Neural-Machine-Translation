@@ -5,13 +5,13 @@ Sequence-to-sequence learning is about training models to convert sequences from
 
 ## Preprocessing: 
 For the English – Czech, and English – German language pairs, we applied series of preprocessing steps:
-•	Splitting the loaded text by line
-•	Converting words to lower case
-•	Removing quotation marks and digits
-•	Removing punctuation
-•	Normalizing punctuation
-•	Appending ‘start’ and ‘end’ tags to the target sentence
-•	Tokenization and padding
+-	Splitting the loaded text by line
+-	Converting words to lower case
+-	Removing quotation marks and digits
+-	Removing punctuation
+-	Normalizing punctuation
+-	Appending ‘start’ and ‘end’ tags to the target sentence
+-	Tokenization and padding
 ## Modeling: 
 The model uses the encoder that reads a variable length input sequence, and hidden state and the cell state of the encoder passes as input to the decoder along with the actual target sequences. The Embedding layer converts each word to a vector. The model uses the decoder that predicts a variable length output sequence. Both the encoder and decoder have the embedding layer (first hidden layer) which translate large sparse vectors into a dense lower-dimension space preventing the semantic relationship. 
 The LSTM layer is defined to both return sequences and state. The Dense output layer is used to predict each character. The decoder output is passed through the softmax layer that learns to classify the correct target character. The loss function is categorical cross entropy that is obtained by comparing the predicted values from softmax layer with the target. Also, we used Bahdanau Attention Mechanism because it is difficult for the decoder to summarize large input sequence at once. The Attention Layer extracts useful information from the encoder and transmits it back to the decoder. Attention places different focus on different words by assigning each word with a score. Then, using the softmaxed scores, we aggregate the encoder hidden states using a weighted sum of the encoder hidden states, to get the context vector, and then we feed the context vector into the decoder. Finally, the model is defined with inputs for the encoder and the decoder and the output target sequence. For the model training step, we used Early Stopping Trigger because when we are training a large network, there will be a point during training when the model will stop generalizing and start learning the statistical noise in the training dataset. Too little training will mean that the model will underfit the train and the test sets. Too much training will mean that the model will overfit the training dataset and have poor performance on the test set. To solve this problem, we used EarlyStopping.  During training, the model is evaluated on a holdout validation dataset after each epoch. If the performance of the model on the validation dataset starts to degrade (loss begins to increase or accuracy begins to decrease), then the training process is stopped.

@@ -2,7 +2,12 @@
 ![](pic/Picture1.png)
 Neural Machine Translation (NMT) for language pairs English – Czech, and English – German using Sequence-to-Sequence Learning. 
 Sequence-to-sequence learning is about training models to convert sequences from one domain (sentences in English) to sequences in another domain (the same sentences translated to Czech/German). We will be training a sequence-to-sequence model based on two Long Short-Term Memory (LSTM) layers to translate English sentences to Czech and German. We will be using LSTM because Recurrent Neural Networks suffer from short-term memory. If a sequence is long enough, it will have a hard time carrying information from earlier time steps to later ones, and our model might give us wrong translation. During back propagation, recurrent neural networks suffer from the vanishing gradient problem. In RNT layers that get a small gradient update stops learning, and because these layers do not learn, RNN’s can forget what it seen in longer sequences. That is why we decided to use LSTM, because it has gates that can regulate the flow of information. These gates can learn which data in a sequence is important to keep or throw away. By doing that, it can pass relevant information down the long chain of sequences to make predictions
+## Exploratory Data Analysis:
 ![](pic/pic1.png)
+![](pic/pic2.png)
+![](pic/pic3.png)
+![](pic/pic4.png)
+![](pic/pic5.png)
 ## Preprocessing: 
 For the English – Czech, and English – German language pairs, we applied series of preprocessing steps:
 -	Splitting the loaded text by line
